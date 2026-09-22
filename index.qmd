@@ -1,0 +1,678 @@
+---
+title: "DISTRIBUCIONES DE FRECUENCIAS"
+subtitle: "CONCEPTOS"
+author: 
+  - name: Miguel Angel Hurtado Rubiano
+    affiliation: "Universidad del Tolima"
+    affiliation-url: "https://www.ut.edu.co/"
+date: today
+lang: es
+title-block-banner: "#FFB800"
+
+format:
+  html:
+    page-layout: full
+    fontsize: 14pt
+    toc: true
+    toc-location: right
+    number-sections: true
+    theme: dark
+    highlight-style: tango
+    html-math-method: katex
+    smooth-scroll: true
+    link-external-newwindow: true
+    code-overflow: scroll
+    favicon: favicon.ico
+    
+editor: visual
+
+knitr:
+  opts_chunk:
+    echo: false
+    message: false
+    warning: false
+    fig.align: center
+    fig.width: 6
+    fig.height: 6
+    out.width: "70%"
+---
+
+```{r setup}
+options(
+  knitr.table.format = "html",
+  scipen = 999
+)
+```
+
+```{=html}
+<div style="position:absolute; top:10px; right:10px;">
+<img src="Logo_ut.png" width="150">
+</div>
+```
+
+```{=html}
+<style>
+body{
+  background-color:#f7f6ed;
+  font-size:130%;
+  text-align:justify;
+}
+</style>
+```
+
+```{r}
+ipak <- function(pkg){
+
+  options(repos = c(CRAN="https://cloud.r-project.org"))
+
+  new.pkg <- pkg[!(pkg %in% rownames(installed.packages()))]
+
+  if(length(new.pkg)) install.packages(new.pkg, dependencies = TRUE)
+
+  invisible(lapply(pkg, function(p)
+    suppressPackageStartupMessages(library(p, character.only = TRUE))
+  ))
+}
+
+packages <- c("tidyverse","kableExtra","psych","readxl")
+
+ipak(packages)
+```
+
+# [.Introducción]{style="color: red;"}
+
+Una **distribución de frecuencias** constituye una de las herramientas fundamentales del análisis estadístico descriptivo. Su propósito es organizar y resumir un conjunto de datos mediante el conteo de las veces que aparece cada valor o categoría de una variable.
+
+Cuando se analiza una sola variable, se construye una **distribución de frecuencias unidimensional**. Cuando se estudian simultáneamente dos variables, se utiliza una **distribución de frecuencias bidimensional**, también conocida como **tabla de contingencia** cuando las variables son categóricas.
+
+Estas herramientas permiten transformar grandes cantidades de información en estructuras organizadas que facilitan la interpretación, comparación y representación gráfica de los datos.
+
+# [.Distribución de frecuencias unidimensional]{style="color: red;"}
+
+## [.concepto]{style="color: red;"}
+
+Una **distribución de frecuencias unidimensional** organiza los valores observados de una única variable junto con el número de veces que aparece cada valor o categoría.
+
+Sea:
+
+$$X=\{x_1,x_2,\ldots,x_n\}$$
+
+un conjunto de $n$ observaciones de una variable estadística $X$.
+
+La distribución de frecuencias permite determinar cuántas observaciones corresponden a cada valor o categoría de la variable.
+
+[**Elementos de una distribución de frecuencias**]{style="color: red;"}
+
+Una tabla de frecuencias puede contener las siguientes columnas:
+
+| Símbolo | Nombre | Interpretación |
+|:----------------------:|------------------------|------------------------|
+| $x_i$ | Valor o categoría | Valor observado de la variable |
+| $f_i$ | Frecuencia absoluta | Número de veces que aparece $x_i$ |
+| $F_i$ | Frecuencia absoluta acumulada | Número de observaciones hasta $x_i$ |
+| $h_i$ | Frecuencia relativa | Proporción de observaciones correspondiente a $x_i$ |
+| $H_i$ | Frecuencia relativa acumulada | Proporción acumulada hasta $x_i$ |
+| $%$ | Porcentaje | Frecuencia relativa expresada en porcentaje |
+
+[**Frecuencia absoluta**]{style="color: red;"}
+
+La **frecuencia absoluta** de un valor $x_i$, representada por $f_i$, corresponde al número de veces que dicho valor aparece en el conjunto de datos.
+
+Se cumple:
+
+$$\sum_{i=1}^{k} f_i=n$$
+
+donde:
+
+- $k$ = número de valores o categorías.
+- $f_i$ = frecuencia absoluta.
+- $n$ = tamaño de la muestra.
+
+[***Ejemplo***]{style="color: red;"}
+
+Supongamos que se consulta a 20 ciudadanos sobre el número de trámites realizados durante el último año:
+
+```{r}
+tramites <- c(
+  1,2,1,3,2,4,1,2,3,1,
+  2,3,2,1,4,2,3,1,2,3
+)
+
+table(tramites)
+```
+
+La función `table()` permite obtener las frecuencias absolutas.
+
+[**Frecuencia absoluta acumulada**]{style="color: red;"}
+
+La **frecuencia absoluta acumulada** se representa mediante $F_i$ y corresponde a la suma progresiva de las frecuencias absolutas.
+
+Se calcula mediante:
+
+$$F_i=\sum_{j=1}^{i}f_j$$
+
+Por tanto:
+
+$$F_1=f_1$$
+
+$$F_2=f_1+f_2$$
+
+$$F_3=f_1+f_2+f_3$$
+
+y así sucesivamente.
+
+La última frecuencia acumulada debe ser igual al tamaño de la muestra:
+
+$$F_k=n$$
+
+[*En R*]{style="color: red;"}
+
+```{r}
+freq <- table(tramites)
+
+freq_abs_acum <- cumsum(freq)
+
+freq_abs_acum
+```
+
+La función `cumsum()` calcula sumas acumuladas.
+
+[**Frecuencia relativa**]{style="color: red;"}
+
+La **frecuencia relativa** indica la proporción de observaciones que corresponde a cada valor o categoría.
+
+Se representa mediante $h_i$ y se calcula como:
+
+$$h_i=\frac{f_i}{n}$$
+
+La suma de todas las frecuencias relativas debe ser:
+
+$$\sum_{i=1}^{k}h_i=1$$
+
+[*En porcentaje*]{style="color: red;"}
+
+Para expresar la frecuencia relativa como porcentaje:
+
+$$p_i=h_i\times100$$
+
+Por ejemplo, si:
+
+$$h_i=0.25$$
+
+entonces:
+
+$$p_i=0.25(100)=25\%$$
+
+[**Frecuencia relativa acumulada**]{style="color: red;"}
+
+La frecuencia relativa acumulada se representa mediante $H_i$.
+
+Se calcula mediante:
+
+$$H_i=\sum_{j=1}^{i}h_j$$
+
+También puede calcularse directamente como:
+
+$$H_i=\frac{F_i}{n}$$
+
+La última frecuencia relativa acumulada debe ser:
+
+$$H_k=1$$
+
+o equivalentemente:
+
+$$H_k=100\%$$
+
+[**Tabla de frecuencias completa**]{style="color: red;"}
+
+Una tabla de frecuencias para una variable cuantitativa discreta puede estructurarse así:
+
+|    $x_i$ |    $f_i$ |    $F_i$ |    $h_i$ |    $H_i$ |       \% |
+|---------:|---------:|---------:|---------:|---------:|---------:|
+|    $x_1$ |    $f_1$ |    $F_1$ |    $h_1$ |    $H_1$ | $100h_1$ |
+|    $x_2$ |    $f_2$ |    $F_2$ |    $h_2$ |    $H_2$ | $100h_2$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+|    $x_k$ |    $f_k$ |      $n$ |      $1$ |      $1$ |      100 |
+
+[*Construcción de una tabla de frecuencias en R*]{style="color: red;"}
+
+Una forma sencilla de construir una tabla completa es:
+
+```{r}
+frecuencias <- as.data.frame(table(tramites))
+
+names(frecuencias) <- c("Valor", "fi")
+
+frecuencias$Fi <- cumsum(frecuencias$fi)
+
+frecuencias$hi <- frecuencias$fi / sum(frecuencias$fi)
+
+frecuencias$Hi <- cumsum(frecuencias$hi)
+
+frecuencias$Porcentaje <- frecuencias$hi * 100
+
+frecuencias
+```
+
+Para redondear:
+
+```{r}
+frecuencias$hi <- round(frecuencias$hi, 4)
+
+frecuencias$Hi <- round(frecuencias$Hi, 4)
+
+frecuencias$Porcentaje <- round(
+  frecuencias$Porcentaje, 2
+)
+
+frecuencias
+```
+
+[**Distribuciones de frecuencias para variables cualitativas**]{style="color: red;"}
+
+Cuando la variable es cualitativa, los valores representan categorías.
+
+[***Ejemplo***]{style="color: red;"}
+
+Supongamos una encuesta realizada a 30 ciudadanos sobre el nivel de satisfacción con un servicio público:
+
+```{r}
+satisfaccion <- c(
+  "Alta","Media","Baja","Alta","Media",
+  "Alta","Baja","Media","Alta","Alta",
+  "Media","Baja","Alta","Media","Alta",
+  "Baja","Media","Alta","Media","Alta",
+  "Baja","Alta","Media","Alta","Media",
+  "Baja","Alta","Media","Alta","Media"
+)
+
+table(satisfaccion)
+```
+
+La tabla puede complementarse con porcentajes:
+
+```{r}
+prop.table(table(satisfaccion))
+```
+
+Y expresarse en porcentaje:
+
+```{r}
+round(prop.table(table(satisfaccion)) * 100, 2)
+```
+
+## [.Representación gráfica de una distribución unidimensional]{style="color: red;"}
+
+La elección del gráfico depende del tipo de variable.
+
+| Tipo de variable      | Gráfico recomendado               |
+|-----------------------|-----------------------------------|
+| Cualitativa nominal   | Barras                            |
+| Cualitativa ordinal   | Barras ordenadas                  |
+| Cuantitativa discreta | Barras                            |
+| Cuantitativa continua | Histograma                        |
+| Cuantitativa          | Polígono de frecuencias           |
+| Cuantitativa          | Ojiva para frecuencias acumuladas |
+
+[**Grádico de barras**]{style="color: red;"}
+
+```{r}
+library(ggplot2)
+
+ggplot(
+  data.frame(satisfaccion),
+  aes(x = satisfaccion, fill = satisfaccion)
+) +
+  geom_bar() +
+  scale_fill_manual(
+    values = c("red","green","yellow")
+  ) +
+  labs(
+    title = "Nivel de satisfacción de los ciudadanos",
+    x = "Nivel de satisfacción",
+    y = "Frecuencia"
+  ) +
+  theme_minimal()
+```
+
+[**Distribución de frecuencias para datos agrupados**]{style="color: red;"}
+
+Cuando una variable cuantitativa continua presenta muchos valores diferentes, puede ser conveniente agruparlos en **intervalos de clase**.
+
+[***Ejemplo***]{style="color: red;"}
+
+$$[20,30),\quad [30,40),\quad [40,50),\quad [50,60)$$
+
+Cada intervalo contiene un conjunto de valores.
+
+[**Elementos de una distribución agrupada**]{style="color: red;"}
+
+Para cada intervalo pueden calcularse:
+
+- Límite inferior.
+- Límite superior.
+- Marca de clase.
+- Frecuencia absoluta.
+- Frecuencia acumulada.
+- Frecuencia relativa.
+- Frecuencia relativa acumulada.
+
+La [**marca de clase**]{style="color: red;"} se calcula mediante:
+
+$$x_i=\frac{L_i+U_i}{2}$$
+
+donde:
+
+- $L_i$ = límite inferior.
+- $U_i$ = límite superior.
+
+[**Número de intervalos**]{style="color: red;"}
+
+Una regla frecuente para determinar aproximadamente el número de clases es la **regla de Sturges**:
+
+$$k=1+3.322\log_{10}(n)$$
+
+donde $n$ representa el tamaño de la muestra.
+
+Otra expresión equivalente es:
+
+$$k=1+\log_2(n)$$
+
+Una vez determinado $k$, puede calcularse la amplitud aproximada:
+
+$$A=\frac{R}{k}$$
+
+donde:
+
+$$R=X_{\max}-X_{\min}$$
+
+es el rango.
+
+[**Distribución de frecuencias para datos cuantitativos**]{style="color: red;"}
+
+Supongamos que se dispone de los ingresos mensuales de 40 usuarios, expresados en millones de pesos:
+
+```{r}
+set.seed(123)
+
+ingresos <- round(
+  runif(40, 1.2, 6.5),
+  2
+)
+
+ingresos
+```
+
+Podemos construir intervalos mediante `cut()`:
+
+```{r}
+intervalos <- cut(
+  ingresos,
+  breaks = c(1, 2, 3, 4, 5, 6, 7),
+  right = FALSE
+)
+
+table(intervalos)
+```
+
+[**histograma**]{style="color: red;"}
+
+Para representar una variable cuantitativa continua:
+
+```{r}
+ggplot(
+  data.frame(ingresos),
+  aes(x = ingresos)
+) +
+  geom_histogram(
+    bins = 6,
+    fill = "gold",
+    color = "black"
+  ) +
+  labs(
+    title = "Distribución de los ingresos mensuales",
+    x = "Ingresos (millones de pesos)",
+    y = "Frecuencia"
+  ) +
+  theme_minimal()
+```
+
+# [.Distribución de frecuencias bidimensional]{style="color: red;"}
+
+## [.concepto]{style="color: red;"}
+
+Una **distribución de frecuencias bidimensional** estudia simultáneamente dos variables estadísticas.
+
+Sean:
+
+$$X \quad \text{y} \quad Y$$
+
+dos variables observadas sobre los mismos individuos.
+
+El objetivo consiste en analizar cómo se distribuyen conjuntamente los valores de ambas variables.
+
+Por ejemplo:
+
+- Edad y satisfacción.
+- Nivel educativo y satisfacción.
+- Estrato y acceso a un programa social.
+- Modalidad de atención y satisfacción.
+- Género y tipo de servicio utilizado.
+
+[**tabla de contingencia**]{style="color: red;"}
+
+Cuando las dos variables son cualitativas o categóricas, la distribución bidimensional suele representarse mediante una **tabla de contingencia**.
+
+Supongamos que se estudian:
+
+- $X$: modalidad de atención.
+- $Y$: nivel de satisfacción.
+
+La tabla puede tener la siguiente estructura:
+
+| Modalidad  |     Alta |    Media |     Baja |    Total |
+|------------|---------:|---------:|---------:|---------:|
+| Presencial | $n_{11}$ | $n_{12}$ | $n_{13}$ | $n_{1.}$ |
+| Virtual    | $n_{21}$ | $n_{22}$ | $n_{23}$ | $n_{2.}$ |
+| **Total**  | $n_{.1}$ | $n_{.2}$ | $n_{.3}$ |      $n$ |
+
+Los valores $n_{ij}$ representan las **frecuencias conjuntas**.
+
+[**frecuencia conjunta**]{style="color: red;"}
+
+La frecuencia conjunta $n_{ij}$ corresponde al número de individuos que simultáneamente presentan:
+
+$$X=x_i$$
+
+y
+
+$$Y=y_j$$
+
+Por ejemplo:
+
+$$n_{23}$$
+
+representaría el número de individuos pertenecientes a la categoría 2 de $X$ y a la categoría 3 de $Y$.
+
+[**frecuencias marginales**]{style="color: red;"}
+
+Las **frecuencias marginales** se obtienen sumando las frecuencias de las filas o columnas.
+
+[***frecuencia marginal de X***]{style="color: red;"}
+
+$$n_{i.}=\sum_j n_{ij}$$
+
+[***frecuencia marginal de Y***]{style="color: red;"}
+
+$$n_{.j}=\sum_i n_{ij}$$
+
+El total general es:
+
+$$n=\sum_i\sum_j n_{ij}$$
+
+[**frecuencias relativas bidimensionales**]{style="color: red;"}
+
+La frecuencia relativa conjunta se calcula como:
+
+$$h_{ij}=\frac{n_{ij}}{n}$$
+
+y cumple:
+
+$$\sum_i\sum_jh_{ij}=1$$
+
+En porcentaje:
+
+$$p_{ij}=100h_{ij}$$
+
+[**frecuencias condicionales**]{style="color: red;"}
+
+Las frecuencias condicionales permiten analizar la distribución de una variable **dentro de una categoría específica de la otra variable**.
+
+Si queremos analizar $Y$ condicionado a $X=x_i$:
+
+$$h_{j|i}=
+\frac{n_{ij}}{n_{i.}}$$
+
+Si queremos analizar $X$ condicionado a $Y=y_j$:
+
+$$h_{i|j}=
+\frac{n_{ij}}{n_{.j}}$$
+
+Las frecuencias condicionales son fundamentales para estudiar posibles relaciones entre dos variables.
+
+[***ejemplo de tabla bidimensional en R***]{style="color: red;"}
+
+Consideremos una encuesta realizada a 100 ciudadanos:
+
+```{r}
+datos <- data.frame(
+  Modalidad = c(
+    "Presencial","Presencial","Presencial",
+    "Virtual","Virtual","Virtual"
+  ),
+  Satisfaccion = c(
+    "Alta","Media","Baja",
+    "Alta","Media","Baja"
+  ),
+  Frecuencia = c(
+    30,15,5,
+    20,20,10
+  )
+)
+
+datos
+```
+
+**Para obtener una tabla de contingencia**:
+
+```{r}
+tabla <- xtabs(
+  Frecuencia ~ Modalidad + Satisfaccion,
+  data = datos
+)
+
+tabla
+```
+
+El resultado conceptual es:
+
+| Modalidad  | Alta | Media | Baja |
+|------------|-----:|------:|-----:|
+| Presencial |   30 |    15 |    5 |
+| Virtual    |   20 |    20 |   10 |
+
+[**interpretación de una tabla bidimensional**]{style="color: red;"}
+
+Supongamos que para los usuarios de modalidad presencial se obtiene:
+
+| Modalidad  | Alta | Media | Baja |
+|------------|-----:|------:|-----:|
+| Presencial |   30 |    15 |    5 |
+
+El total de usuarios presenciales es:
+
+$$30+15+5=50$$
+
+Por tanto, la proporción de usuarios presenciales con satisfacción alta es:
+
+$$\frac{30}{50}=0.60$$
+
+o:
+
+$$60\%$$
+
+Una interpretación estadística sería:
+
+> El 60 % de los usuarios atendidos mediante la modalidad presencial presenta un nivel de satisfacción alto.
+
+Es importante distinguir este resultado de un porcentaje calculado sobre el total general de la muestra.
+
+# [.Conclusiones]{style="color: red;"}
+
+Las distribuciones de frecuencias unidimensionales permiten organizar y resumir la información correspondiente a una sola variable mediante frecuencias absolutas, acumuladas, relativas y porcentuales.
+
+Las distribuciones de frecuencias bidimensionales permiten analizar conjuntamente dos variables y constituyen una herramienta fundamental para estudiar patrones de asociación mediante frecuencias conjuntas, marginales y condicionales.
+
+En R/RStudio, funciones como table(), prop.table(), cumsum(), xtabs() y ggplot2 permiten automatizar gran parte del proceso de construcción, análisis y visualización de las distribuciones de frecuencias.
+
+El análisis estadístico debe ir más allá de la construcción mecánica de tablas: es fundamental interpretar los resultados dentro del contexto de investigación y seleccionar correctamente los porcentajes, gráficos y procedimientos estadísticos de acuerdo con el tipo de variables estudiadas.
+
+# [.Resumen de fórmulas]{style="color: red;"}
+
+<br>
+
+[***Frecuencia absoluta***]{style="color: red;"}
+
+$$f_i$$
+
+[***Frecuencia absoluta acumulada***]{style="color: red;"}
+
+$$F_i=\sum_{j=1}^{i}f_j$$
+
+[***Frecuencia relativa***]{style="color: red;"}
+
+$$h_i=\frac{f_i}{n}$$
+
+[***Frecuencia relativa acumulada***]{style="color: red;"}
+
+$$H_i=\sum_{j=1}^{i}h_j$$
+
+[***Porcentaje***]{style="color: red;"}
+
+$$p_i=100h_i$$
+
+[***Frecuencia conjunta***]{style="color: red;"}
+
+$$n_{ij}$$
+
+[***Frecuencia marginal de X***]{style="color: red;"}
+
+$$n_{i.}=\sum_jn_{ij}$$
+
+[***Frecuencia marginal de Y***]{style="color: red;"}
+
+$$n_{.j}=\sum_in_{ij}$$
+
+[***Frecuencia relativa conjunta***]{style="color: red;"}
+
+$$h_{ij}=\frac{n_{ij}}{n}$$
+
+[***Frecuencia condicional***]{style="color: red;"}
+
+$$h_{j|i}=\frac{n_{ij}}{n_{i.}}$$
+
+[***Regla de Sturges***]{style="color: red;"}
+
+$$k=1+3.322\log_{10}(n)$$
+
+[***Amplitud***]{style="color: red;"}
+
+$$A=\frac{R}{k}$$
+
+[***Rango***]{style="color: red;"}
+
+$$R=X_{\max}-X_{\min}$$
+
+[***Marca de clase***]{style="color: red;"}
+
+$$x_i=\frac{L_i+U_i}{2}$$
