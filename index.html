@@ -187,7 +187,6 @@ window.Quarto = {
   <li><a href="#concepto-1" id="toc-concepto-1" class="nav-link" data-scroll-target="#concepto-1"><span class="header-section-number">3.1</span> <span style="color: red;">.concepto</span></a></li>
   </ul></li>
   <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="header-section-number">4</span> <span style="color: red;">.Conclusiones</span></a></li>
-  <li><a href="#resumen-de-fórmulas" id="toc-resumen-de-fórmulas" class="nav-link" data-scroll-target="#resumen-de-fórmulas"><span class="header-section-number">5</span> <span style="color: red;">.Resumen de fórmulas</span></a></li>
   </ul>
 </nav>
 </div>
@@ -210,7 +209,7 @@ body{
 <section id="introducción" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> <span style="color: red;">.Introducción</span></h1>
 <p>Una <strong>distribución de frecuencias</strong> constituye una de las herramientas fundamentales del análisis estadístico descriptivo. Su propósito es organizar y resumir un conjunto de datos mediante el conteo de las veces que aparece cada valor o categoría de una variable.</p>
-<p>Cuando se analiza una sola variable, se construye una <strong>distribución de frecuencias unidimensional</strong>. Cuando se estudian simultáneamente dos variables, se utiliza una <strong>distribución de frecuencias bidimensional</strong>, también conocida como <strong>tabla de contingencia</strong> cuando las variables son categóricas.</p>
+<p>Cuando se analiza una sola variable se construye una <strong>distribución de frecuencias unidimensional</strong>. Cuando se estudian simultáneamente dos variables, se utiliza una <strong>distribución de frecuencias bidimensional</strong>, también conocida como <strong>tabla de contingencia</strong> cuando las variables son categóricas.</p>
 <p>Estas herramientas permiten transformar grandes cantidades de información en estructuras organizadas que facilitan la interpretación, comparación y representación gráfica de los datos.</p>
 </section>
 <section id="distribución-de-frecuencias-unidimensional" class="level1" data-number="2">
@@ -870,38 +869,6 @@ Modalidad    Alta Baja Media
 <p>Las distribuciones de frecuencias bidimensionales permiten analizar conjuntamente dos variables y constituyen una herramienta fundamental para estudiar patrones de asociación mediante frecuencias conjuntas, marginales y condicionales.</p>
 <p>En R/RStudio, funciones como table(), prop.table(), cumsum(), xtabs() y ggplot2 permiten automatizar gran parte del proceso de construcción, análisis y visualización de las distribuciones de frecuencias.</p>
 <p>El análisis estadístico debe ir más allá de la construcción mecánica de tablas: es fundamental interpretar los resultados dentro del contexto de investigación y seleccionar correctamente los porcentajes, gráficos y procedimientos estadísticos de acuerdo con el tipo de variables estudiadas.</p>
-</section>
-<section id="resumen-de-fórmulas" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> <span style="color: red;">.Resumen de fórmulas</span></h1>
-<p><br></p>
-<p><span style="color: red;"><strong><em>Frecuencia absoluta</em></strong></span></p>
-<p><span class="math display">f_i</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia absoluta acumulada</em></strong></span></p>
-<p><span class="math display">F_i=\sum_{j=1}^{i}f_j</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia relativa</em></strong></span></p>
-<p><span class="math display">h_i=\frac{f_i}{n}</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia relativa acumulada</em></strong></span></p>
-<p><span class="math display">H_i=\sum_{j=1}^{i}h_j</span></p>
-<p><span style="color: red;"><strong><em>Porcentaje</em></strong></span></p>
-<p><span class="math display">p_i=100h_i</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia conjunta</em></strong></span></p>
-<p><span class="math display">n_{ij}</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia marginal de X</em></strong></span></p>
-<p><span class="math display">n_{i.}=\sum_jn_{ij}</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia marginal de Y</em></strong></span></p>
-<p><span class="math display">n_{.j}=\sum_in_{ij}</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia relativa conjunta</em></strong></span></p>
-<p><span class="math display">h_{ij}=\frac{n_{ij}}{n}</span></p>
-<p><span style="color: red;"><strong><em>Frecuencia condicional</em></strong></span></p>
-<p><span class="math display">h_{j|i}=\frac{n_{ij}}{n_{i.}}</span></p>
-<p><span style="color: red;"><strong><em>Regla de Sturges</em></strong></span></p>
-<p><span class="math display">k=1+3.322\log_{10}(n)</span></p>
-<p><span style="color: red;"><strong><em>Amplitud</em></strong></span></p>
-<p><span class="math display">A=\frac{R}{k}</span></p>
-<p><span style="color: red;"><strong><em>Rango</em></strong></span></p>
-<p><span class="math display">R=X_{\max}-X_{\min}</span></p>
-<p><span style="color: red;"><strong><em>Marca de clase</em></strong></span></p>
-<p><span class="math display">x_i=\frac{L_i+U_i}{2}</span></p>
 </section>
 
 </main>

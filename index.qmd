@@ -85,7 +85,7 @@ ipak(packages)
 
 Una **distribución de frecuencias** constituye una de las herramientas fundamentales del análisis estadístico descriptivo. Su propósito es organizar y resumir un conjunto de datos mediante el conteo de las veces que aparece cada valor o categoría de una variable.
 
-Cuando se analiza una sola variable, se construye una **distribución de frecuencias unidimensional**. Cuando se estudian simultáneamente dos variables, se utiliza una **distribución de frecuencias bidimensional**, también conocida como **tabla de contingencia** cuando las variables son categóricas.
+Cuando se analiza una sola variable se construye una **distribución de frecuencias unidimensional**. Cuando se estudian simultáneamente dos variables, se utiliza una **distribución de frecuencias bidimensional**, también conocida como **tabla de contingencia** cuando las variables son categóricas.
 
 Estas herramientas permiten transformar grandes cantidades de información en estructuras organizadas que facilitan la interpretación, comparación y representación gráfica de los datos.
 
@@ -618,63 +618,3 @@ Las distribuciones de frecuencias bidimensionales permiten analizar conjuntament
 En R/RStudio, funciones como table(), prop.table(), cumsum(), xtabs() y ggplot2 permiten automatizar gran parte del proceso de construcción, análisis y visualización de las distribuciones de frecuencias.
 
 El análisis estadístico debe ir más allá de la construcción mecánica de tablas: es fundamental interpretar los resultados dentro del contexto de investigación y seleccionar correctamente los porcentajes, gráficos y procedimientos estadísticos de acuerdo con el tipo de variables estudiadas.
-
-# [.Resumen de fórmulas]{style="color: red;"}
-
-<br>
-
-[***Frecuencia absoluta***]{style="color: red;"}
-
-$$f_i$$
-
-[***Frecuencia absoluta acumulada***]{style="color: red;"}
-
-$$F_i=\sum_{j=1}^{i}f_j$$
-
-[***Frecuencia relativa***]{style="color: red;"}
-
-$$h_i=\frac{f_i}{n}$$
-
-[***Frecuencia relativa acumulada***]{style="color: red;"}
-
-$$H_i=\sum_{j=1}^{i}h_j$$
-
-[***Porcentaje***]{style="color: red;"}
-
-$$p_i=100h_i$$
-
-[***Frecuencia conjunta***]{style="color: red;"}
-
-$$n_{ij}$$
-
-[***Frecuencia marginal de X***]{style="color: red;"}
-
-$$n_{i.}=\sum_jn_{ij}$$
-
-[***Frecuencia marginal de Y***]{style="color: red;"}
-
-$$n_{.j}=\sum_in_{ij}$$
-
-[***Frecuencia relativa conjunta***]{style="color: red;"}
-
-$$h_{ij}=\frac{n_{ij}}{n}$$
-
-[***Frecuencia condicional***]{style="color: red;"}
-
-$$h_{j|i}=\frac{n_{ij}}{n_{i.}}$$
-
-[***Regla de Sturges***]{style="color: red;"}
-
-$$k=1+3.322\log_{10}(n)$$
-
-[***Amplitud***]{style="color: red;"}
-
-$$A=\frac{R}{k}$$
-
-[***Rango***]{style="color: red;"}
-
-$$R=X_{\max}-X_{\min}$$
-
-[***Marca de clase***]{style="color: red;"}
-
-$$x_i=\frac{L_i+U_i}{2}$$
