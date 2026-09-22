@@ -23,12 +23,14 @@ format:
     link-external-newwindow: true
     code-overflow: scroll
     favicon: favicon.ico
+    code-fold: true
+    code-summary: "Ver código"
     
 editor: visual
 
 knitr:
   opts_chunk:
-    echo: false
+    echo: true
     message: false
     warning: false
     fig.align: center
@@ -37,7 +39,7 @@ knitr:
     out.width: "70%"
 ---
 
-```{r setup}
+```{r setup, echo=FALSE}
 options(
   knitr.table.format = "html",
   scipen = 999
@@ -60,7 +62,7 @@ body{
 </style>
 ```
 
-```{r}
+```{r, echo=FALSE}
 ipak <- function(pkg){
 
   options(repos = c(CRAN="https://cloud.r-project.org"))
